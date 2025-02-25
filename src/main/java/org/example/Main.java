@@ -10,26 +10,26 @@ public class Main {
         Calculator<Number> calc = new Calculator<>();
 
         do {
-            Number operand1 = parser.getValidOperand("첫 번째 숫자를 입력해주세요. ");
-            Number operand2 = parser.getValidOperand("두 번째 숫자를 입력해주세요. ");
+            Number operand1 = parser.getValidNumber("첫 번째 숫자를 입력해주세요. ");
+            Number operand2 = parser.getValidNumber("두 번째 숫자를 입력해주세요. ");
             Operator operator = parser.getValidOperator();
 
             Number result = calc.eval(operand1, operand2, operator);
-            calc.addHistory(new EvalHistory(operand1, operand2, operator, result));
+            EvalHistory evalHistory = new EvalHistory(operand1, operand2, operator, result);
+            calc.addHistory(evalHistory);
 
             // 계산 기록이 10개보다 많을 때 가장 처음 기록을 삭제한다.
             if (calc.getHistory().size() > 10) {
                 calc.removeFirstHistory();
             }
 
-            System.out.printf("%s %s %s = %s%n",
-                    stripTrailingZeros(operand1), operator.getSymbol(), stripTrailingZeros(operand2), stripTrailingZeros(result));
+            System.out.println(evalHistory);
         } while (!parser.checkExit());
-    }
 
-    private static String stripTrailingZeros(Number number) {
-        return String.valueOf(number)
-                .replaceAll("\\.0+$", "")
-                .replaceAll("(\\.\\d*?)0+$", "$1");
+        do {
+            Number condNum = parser.getValidNumber("N보다 큰 결과를 가진 계산 기록을 출력합니다. N을 입력해주세요. ");
+            calc.getHistoryGreaterThan(condNum).forEach(System.out::println);
+        } while (!parser.checkExit());
+
     }
 }

@@ -45,4 +45,15 @@ public class Calculator <T extends Number> {
     public void removeFirstHistory() {
         this.history.removeFirst();
     }
+
+    /**
+     * number 보다 큰 결과를 가진 계산 기록을 반환한다.
+     * @param number 실수
+     * @return number보다 큰 결과를 가진 계산 기록들
+     */
+    public List<EvalHistory> getHistoryGreaterThan(T number) {
+        return this.history.stream()
+                .filter(h -> h.result().doubleValue() > number.doubleValue())
+                .toList();
+    }
 }

@@ -13,7 +13,7 @@ public class Parser {
      * 올바른 피연산자를 입력받아서 반환한다.
      * @return 입력받은 피연산자
      */
-    public Number getValidOperand(String prompt) {
+    public Number getValidNumber(String prompt) {
         Number number;
 
         System.out.print(prompt);
