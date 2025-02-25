@@ -1,9 +1,9 @@
 package org.example;
 
 public record EvalHistory(
-        int operand1,
-        int operand2,
+        Number operand1,
+        Number operand2,
         Operator operation,
-        int result
+        Number result
 ) {
 }

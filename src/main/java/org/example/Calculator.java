@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Calculator {
+public class Calculator <T extends Number> {
 
     private final List<EvalHistory> history = new ArrayList<>();
 
@@ -14,16 +14,16 @@ public class Calculator {
      * @param operator 연산자
      * @return 계산한 결과
      */
-    public Integer eval(int operand1, int operand2, Operator operator) {
+    public Double eval(T operand1, T operand2, Operator operator) {
         return switch (operator) {
-            case ADD -> operand1 + operand2;
-            case SUBTRACT -> operand1 - operand2;
-            case MULTIPLY -> operand1 * operand2;
+            case ADD -> operand1.doubleValue() + operand2.doubleValue();
+            case SUBTRACT -> operand1.doubleValue() - operand2.doubleValue();
+            case MULTIPLY -> operand1.doubleValue() * operand2.doubleValue();
             case DIVIDE -> {
-                if (operand2 == 0) {
+                if (operand2.doubleValue() == 0) {
                     yield null;
                 }
-                yield operand1 / operand2;
+                yield operand1.doubleValue() / operand2.doubleValue();
             }
         };
     }
