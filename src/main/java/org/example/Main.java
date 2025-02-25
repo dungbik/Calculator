@@ -10,6 +10,8 @@ public class Main {
     public static void main(String[] args) {
 
         do {
+            Calculator calc = new Calculator();
+
             System.out.print("첫 번째 숫자를 입력해주세요. ");
             int operand1 = getValidOperand();
 
@@ -19,7 +21,15 @@ public class Main {
             System.out.print("연산자를 입력해주세요. ");
             char operation = getValidOperation();
 
-            Integer result = eval(operand1, operand2, operation);
+            Integer result = calc.eval(operand1, operand2, operation);
+
+            calc.addHistory(new EvalHistory(operand1, operand2, operation, result));
+
+            // 계산 기록이 10개보다 많을 때 가장 처음 기록을 삭제한다.
+            if (calc.getHistory().size() > 10) {
+                calc.removeFirstHistory();
+            }
+
             System.out.printf("%d %s %d = %d%n", operand1, operation, operand2, result);
 
         } while (!checkExit());
@@ -79,28 +89,6 @@ public class Main {
         return operation.length() == 1 
                 && (Objects.equals(operation, "+") || Objects.equals(operation, "-") 
                 || Objects.equals(operation, "*") || Objects.equals(operation, "/"));
-    }
-
-    /**
-     * 피연산자 2개와 연산자를 계산하여 결과를 반환한다.
-     * @param operand1 피연산자1
-     * @param operand2 피연산자2
-     * @param operation 연산자
-     * @return 계산한 결과
-     */
-    private static Integer eval(int operand1, int operand2, char operation) {
-        return switch (operation) {
-            case '+' -> operand1 + operand2;
-            case '-' -> operand1 - operand2;
-            case '*' -> operand1 * operand2;
-            case '/' -> {
-                if (operand2 == 0) {
-                    yield null;
-                }
-                yield operand1 / operand2;
-            }
-            default -> throw new RuntimeException("Unexpected operation: " + operation);
-        };
     }
 
     private static boolean checkExit() {
