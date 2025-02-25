@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.constant.EvalHistory;
+import org.example.constant.Operator;
+
 import java.util.ArrayList;
 import java.util.List;
 

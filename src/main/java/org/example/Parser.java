@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.constant.Operator;
+
 import java.util.Objects;
 import java.util.Scanner;
 
