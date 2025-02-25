@@ -11,11 +11,11 @@ public class Calculator {
      * 피연산자 2개와 연산자를 계산하여 결과를 반환한다.
      * @param operand1 피연산자1
      * @param operand2 피연산자2
-     * @param operation 연산자
+     * @param operator 연산자
      * @return 계산한 결과
      */
-    public Integer eval(int operand1, int operand2, char operation) {
-        return switch (operation) {
+    public Integer eval(int operand1, int operand2, char operator) {
+        return switch (operator) {
             case '+' -> operand1 + operand2;
             case '-' -> operand1 - operand2;
             case '*' -> operand1 * operand2;
@@ -25,7 +25,7 @@ public class Calculator {
                 }
                 yield operand1 / operand2;
             }
-            default -> throw new RuntimeException("Unexpected operation: " + operation);
+            default -> throw new RuntimeException("Unexpected operator: " + operator);
         };
     }
 

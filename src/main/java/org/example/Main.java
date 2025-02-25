@@ -19,18 +19,18 @@ public class Main {
             int operand2 = getValidOperand();
 
             System.out.print("연산자를 입력해주세요. ");
-            char operation = getValidOperation();
+            char operator = getValidOperator();
 
-            Integer result = calc.eval(operand1, operand2, operation);
+            Integer result = calc.eval(operand1, operand2, operator);
 
-            calc.addHistory(new EvalHistory(operand1, operand2, operation, result));
+            calc.addHistory(new EvalHistory(operand1, operand2, operator, result));
 
             // 계산 기록이 10개보다 많을 때 가장 처음 기록을 삭제한다.
             if (calc.getHistory().size() > 10) {
                 calc.removeFirstHistory();
             }
 
-            System.out.printf("%d %s %d = %d%n", operand1, operation, operand2, result);
+            System.out.printf("%d %s %d = %d%n", operand1, operator, operand2, result);
 
         } while (!checkExit());
     }
@@ -62,13 +62,13 @@ public class Main {
      * 정해진 연산자만 입력받아서 반환한다.
      * @return 입력받은 연산자
      */
-    private static char getValidOperation() {
+    private static char getValidOperator() {
         String input;
         
         while (true) {
             try {
                 input = sc.nextLine();
-                if (isValidOperation(input)) {
+                if (isValidOperator(input)) {
                     break;
                 }
             } catch (Exception e) {
@@ -82,13 +82,13 @@ public class Main {
 
     /**
      * 입력받은 문자열이 올바른 연산자인지 확인한다.
-     * @param operation 연산자
+     * @param operator 연산자
      * @return 올바른 연산자인지 여부
      */
-    private static boolean isValidOperation(String operation) {
-        return operation.length() == 1 
-                && (Objects.equals(operation, "+") || Objects.equals(operation, "-") 
-                || Objects.equals(operation, "*") || Objects.equals(operation, "/"));
+    private static boolean isValidOperator(String operator) {
+        return operator.length() == 1
+                && (Objects.equals(operator, "+") || Objects.equals(operator, "-")
+                || Objects.equals(operator, "*") || Objects.equals(operator, "/"));
     }
 
     private static boolean checkExit() {
