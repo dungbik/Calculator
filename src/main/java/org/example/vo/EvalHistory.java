@@ -1,5 +1,6 @@
-package org.example.constant;
+package org.example.vo;
 
+import org.example.constant.Operator;
 import org.example.util.NumberUtil;
 
 public record EvalHistory(

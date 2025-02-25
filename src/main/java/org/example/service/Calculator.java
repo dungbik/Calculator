@@ -1,6 +1,6 @@
-package org.example;
+package org.example.service;
 
-import org.example.constant.EvalHistory;
+import org.example.vo.EvalHistory;
 import org.example.constant.Operator;
 
 import java.util.ArrayList;
