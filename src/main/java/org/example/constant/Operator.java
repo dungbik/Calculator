@@ -4,7 +4,8 @@ public enum Operator {
     ADD("+"),
     SUBTRACT("-"),
     MULTIPLY("*"),
-    DIVIDE("/")
+    DIVIDE("/"),
+    MODULO("%"),
     ;
 
     final String symbol;

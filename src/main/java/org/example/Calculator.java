@@ -28,6 +28,12 @@ public class Calculator <T extends Number> {
                 }
                 yield operand1.doubleValue() / operand2.doubleValue();
             }
+            case MODULO -> {
+                if (operand2.doubleValue() == 0) {
+                    yield null;
+                }
+                yield operand1.doubleValue() % operand2.doubleValue();
+            }
         };
     }
 
