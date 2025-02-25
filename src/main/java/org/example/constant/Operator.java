@@ -6,6 +6,7 @@ public enum Operator {
     MULTIPLY("*"),
     DIVIDE("/"),
     MODULO("%"),
+    POWER("^"),
     ;
 
     final String symbol;

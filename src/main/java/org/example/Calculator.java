@@ -34,6 +34,7 @@ public class Calculator <T extends Number> {
                 }
                 yield operand1.doubleValue() % operand2.doubleValue();
             }
+            case POWER -> Math.pow(operand1.doubleValue(), operand2.doubleValue());
         };
     }
 
