@@ -14,18 +14,17 @@ public class Calculator {
      * @param operator 연산자
      * @return 계산한 결과
      */
-    public Integer eval(int operand1, int operand2, char operator) {
+    public Integer eval(int operand1, int operand2, Operator operator) {
         return switch (operator) {
-            case '+' -> operand1 + operand2;
-            case '-' -> operand1 - operand2;
-            case '*' -> operand1 * operand2;
-            case '/' -> {
+            case ADD -> operand1 + operand2;
+            case SUBTRACT -> operand1 - operand2;
+            case MULTIPLY -> operand1 * operand2;
+            case DIVIDE -> {
                 if (operand2 == 0) {
                     yield null;
                 }
                 yield operand1 / operand2;
             }
-            default -> throw new RuntimeException("Unexpected operator: " + operator);
         };
     }
 

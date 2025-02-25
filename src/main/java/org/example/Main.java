@@ -19,7 +19,7 @@ public class Main {
             int operand2 = getValidOperand();
 
             System.out.print("연산자를 입력해주세요. ");
-            char operator = getValidOperator();
+            Operator operator = getValidOperator();
 
             Integer result = calc.eval(operand1, operand2, operator);
 
@@ -30,7 +30,7 @@ public class Main {
                 calc.removeFirstHistory();
             }
 
-            System.out.printf("%d %s %d = %d%n", operand1, operator, operand2, result);
+            System.out.printf("%d %s %d = %d%n", operand1, operator.getSymbol(), operand2, result);
 
         } while (!checkExit());
     }
@@ -62,13 +62,14 @@ public class Main {
      * 정해진 연산자만 입력받아서 반환한다.
      * @return 입력받은 연산자
      */
-    private static char getValidOperator() {
+    private static Operator getValidOperator() {
         String input;
+        Operator operator;
         
         while (true) {
             try {
                 input = sc.nextLine();
-                if (isValidOperator(input)) {
+                if ((operator = Operator.parse(input)) != null) {
                     break;
                 }
             } catch (Exception e) {
@@ -77,18 +78,7 @@ public class Main {
             System.out.print("연산자를 다시 입력해주세요. ");
         }
 
-        return input.charAt(0);
-    }
-
-    /**
-     * 입력받은 문자열이 올바른 연산자인지 확인한다.
-     * @param operator 연산자
-     * @return 올바른 연산자인지 여부
-     */
-    private static boolean isValidOperator(String operator) {
-        return operator.length() == 1
-                && (Objects.equals(operator, "+") || Objects.equals(operator, "-")
-                || Objects.equals(operator, "*") || Objects.equals(operator, "/"));
+        return operator;
     }
 
     private static boolean checkExit() {
