@@ -8,17 +8,21 @@ public class Main {
     private final static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.print("첫 번째 숫자를 입력해주세요. ");
-        int operand1 = getValidOperand();
 
-        System.out.print("두 번째 숫자를 입력해주세요. ");
-        int operand2 = getValidOperand();
+        do {
+            System.out.print("첫 번째 숫자를 입력해주세요. ");
+            int operand1 = getValidOperand();
 
-        System.out.print("연산자를 입력해주세요. ");
-        char operation = getValidOperation();
+            System.out.print("두 번째 숫자를 입력해주세요. ");
+            int operand2 = getValidOperand();
 
-        Integer result = eval(operand1, operand2, operation);
-        System.out.printf("%d %s %d = %d%n", operand1, operation, operand2, result);
+            System.out.print("연산자를 입력해주세요. ");
+            char operation = getValidOperation();
+
+            Integer result = eval(operand1, operand2, operation);
+            System.out.printf("%d %s %d = %d%n", operand1, operation, operand2, result);
+
+        } while (!checkExit());
     }
 
     /**
@@ -34,8 +38,9 @@ public class Main {
                 if (number >= 0) {
                     break;
                 }
-            } catch (Exception e) {
-                sc.next(); // Clear EOL input
+            } catch (Exception ignored) {
+            } finally {
+                sc.nextLine();
             }
             System.out.print("숫자를 다시 입력해주세요. ");
         }
@@ -52,7 +57,7 @@ public class Main {
         
         while (true) {
             try {
-                input = sc.next();
+                input = sc.nextLine();
                 if (isValidOperation(input)) {
                     break;
                 }
@@ -96,5 +101,18 @@ public class Main {
             }
             default -> throw new RuntimeException("Unexpected operation: " + operation);
         };
+    }
+
+    private static boolean checkExit() {
+        try {
+            System.out.print("종료하시려면 exit를 입력해주세요. ");
+            String input = sc.nextLine();
+            if (Objects.equals(input, "exit")) {
+                return true;
+            }
+        } catch (Exception e) {
+            sc.next(); // Clear EOL input
+        }
+        return false;
     }
 }
