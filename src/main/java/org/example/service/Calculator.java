@@ -1,14 +1,35 @@
 package org.example.service;
 
+import org.example.operation.AbstractOperation;
+import org.example.operation.annotation.Operation;
+import org.example.util.NumberUtil;
 import org.example.vo.EvalHistory;
 import org.example.constant.Operator;
+import org.reflections.Reflections;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Calculator <T extends Number> {
 
+    private final Map<Operator, AbstractOperation> operations;
+
     private final List<EvalHistory> history = new ArrayList<>();
+
+    public Calculator() {
+        this.operations = new HashMap<>();
+
+        Reflections reflections = new Reflections("org.example.operation");
+        Set<Class<?>> operationClasses = reflections.getTypesAnnotatedWith(Operation.class);
+
+        for (Class<?> cls : operationClasses) {
+            Operation op = cls.getAnnotation(Operation.class);
+            try {
+                this.operations.put(op.operator(), (AbstractOperation) cls.getDeclaredConstructor().newInstance());
+            } catch (Exception e) {
+                System.err.printf("%s could not be instantiated.\n", cls.getName());
+            }
+        }
+    }
 
     /**
      * 피연산자 2개와 연산자를 계산하여 결과를 반환한다.
@@ -18,24 +39,13 @@ public class Calculator <T extends Number> {
      * @return 계산한 결과
      */
     public Double eval(T operand1, T operand2, Operator operator) {
-        return switch (operator) {
-            case ADD -> operand1.doubleValue() + operand2.doubleValue();
-            case SUBTRACT -> operand1.doubleValue() - operand2.doubleValue();
-            case MULTIPLY -> operand1.doubleValue() * operand2.doubleValue();
-            case DIVIDE -> {
-                if (operand2.doubleValue() == 0) {
-                    yield null;
-                }
-                yield operand1.doubleValue() / operand2.doubleValue();
-            }
-            case MODULO -> {
-                if (operand2.doubleValue() == 0) {
-                    yield null;
-                }
-                yield operand1.doubleValue() % operand2.doubleValue();
-            }
-            case POWER -> Math.pow(operand1.doubleValue(), operand2.doubleValue());
-        };
+        try {
+            return this.operations.get(operator).operate(operand1.doubleValue(), operand2.doubleValue());
+        } catch (Exception e) {
+            System.err.printf("'%s %s %s' could not be evaluated. reason: %s\n",
+                    NumberUtil.stripTrailingZeros(operand1), operator.getSymbol(), NumberUtil.stripTrailingZeros(operand2), e.getMessage());
+            return null;
+        }
     }
 
     public List<EvalHistory> getHistory() {

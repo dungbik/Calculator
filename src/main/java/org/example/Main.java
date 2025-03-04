@@ -18,7 +18,9 @@ public class Main {
 
             Number result = calc.eval(operand1, operand2, operator);
             EvalHistory evalHistory = new EvalHistory(operand1, operand2, operator, result);
-            calc.addHistory(evalHistory);
+            if (result != null) {
+                calc.addHistory(evalHistory);
+            }
 
             // 계산 기록이 10개보다 많을 때 가장 처음 기록을 삭제한다.
             if (calc.getHistory().size() > 10) {
