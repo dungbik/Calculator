@@ -23,7 +23,7 @@ public class Main {
             }
 
             // 계산 기록이 10개보다 많을 때 가장 처음 기록을 삭제한다.
-            if (calc.getHistory().size() > 10) {
+            if (calc.getEvalHistory().size() > 10) {
                 calc.removeFirstHistory();
             }
 
