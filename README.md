@@ -2,10 +2,14 @@
 
 자바를 학습하면서 배운 내용과 개념을 통해 클래스를 활용한 계산기와 클래스를 사용하지 않는 계산기 개발하기
 
+---
+
 # 개발 환경
 - Windows 11
 - Eclipse Temurin JDK 17
 - IntelliJ Ultimate
+
+---
 
 # 요구사항 정의
 
@@ -20,6 +24,8 @@
 ## 사용자 인터페이스
 콘솔 기반의 사용자 인터페이스를 사용한다.
 
+---
+
 # 설계
 
 ## 클래스 다이어그램
@@ -27,6 +33,8 @@
 
 ## 시퀀스 다이어그램
 ![Sequence Diagram](img/SequenceDiagram.png)
+
+---
 
 # 깃 컨벤션
 - tag: subject
@@ -41,6 +49,8 @@
 - refactor: 코드 리팩토링
 - test: 테스트 코드, 리팩토링 테스트 코드 추가
 - chore: 빌드 업무 수정, 패키지 매니저 수정
+
+---
 
 # 패키지 구조
 ```
@@ -67,6 +77,8 @@
     │   └── 📄 EvalHistory
     └── 📄 Main
 ```
+
+---
 
 # 트러블 슈팅
 [link](https://dungbik.github.io/p/nb-til-7/)
