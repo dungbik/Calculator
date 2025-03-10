@@ -28,12 +28,12 @@ public class Main {
             }
 
             System.out.println(evalHistory);
-        } while (!parser.checkExit());
+        } while (!parser.isExitCommand());
 
         do {
             Number condNum = parser.getValidNumber("N보다 큰 결과를 가진 계산 기록을 출력합니다. N을 입력해주세요. ");
             calc.getHistoryGreaterThan(condNum).forEach(System.out::println);
-        } while (!parser.checkExit());
+        } while (!parser.isExitCommand());
 
     }
 }

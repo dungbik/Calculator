@@ -57,7 +57,7 @@ public class Parser {
      * 종료 여부를 입력받아서 참, 거짓으로 반환한다.
      * @return 종료 여부
      */
-    public boolean checkExit() {
+    public boolean isExitCommand() {
         try {
             System.out.print("종료하시려면 exit를 입력해주세요. ");
             String input = sc.nextLine();
