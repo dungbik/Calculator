@@ -1,6 +1,6 @@
-package org.example.operation.annotation;
+package org.example.annotation;
 
-import org.example.constant.Operator;
+import org.example.constant.OperatorType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Operation {
-    Operator operator();
+    OperatorType operator();
 }

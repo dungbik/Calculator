@@ -1,12 +1,12 @@
 package org.example.vo;
 
-import org.example.constant.Operator;
+import org.example.constant.OperatorType;
 import org.example.util.NumberUtil;
 
 public record EvalHistory(
         Number operand1,
         Number operand2,
-        Operator operator,
+        OperatorType operator,
         Number result
 ) {
 

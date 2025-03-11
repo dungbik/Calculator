@@ -1,6 +1,6 @@
 package org.example.constant;
 
-public enum Operator {
+public enum OperatorType {
     ADD("+"),
     SUBTRACT("-"),
     MULTIPLY("*"),
@@ -11,12 +11,12 @@ public enum Operator {
 
     final String symbol;
 
-    Operator(String symbol) {
+    OperatorType(String symbol) {
         this.symbol = symbol;
     }
 
-    public static Operator parse(String symbol) {
-        for (Operator op : Operator.values()) {
+    public static OperatorType parse(String symbol) {
+        for (OperatorType op : OperatorType.values()) {
             if (op.symbol.equals(symbol)) {
                 return op;
             }
