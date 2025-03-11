@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.exception;
 
 public class NotSupportOperatorException extends RuntimeException {
 
